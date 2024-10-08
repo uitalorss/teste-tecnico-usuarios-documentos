@@ -3,6 +3,7 @@ import { ICreateUserDTO } from "../../domain/models/DTO/ICreateUserDTO";
 import { IUser } from "../../domain/models/IUser";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { inject, injectable } from "tsyringe"
+import { IGetUserDTO } from "../../domain/models/DTO/IGetUserDTO";
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -15,6 +16,20 @@ export class UserRepository implements IUserRepository {
             data: {
                 name,
                 email
+            }
+        })
+        return user;
+    }
+
+    async findAll(): Promise<IUser[]>{
+        const users = await this.prismaClient.user.findMany()
+        return users
+    }
+
+    async find({id}: IGetUserDTO): Promise<IUser | null>{
+        const user = await this.prismaClient.user.findUnique({
+            where: {
+                id 
             }
         })
         return user;
