@@ -24,7 +24,11 @@ export class UserRepository implements IUserRepository {
     }
 
     async findAll(): Promise<IUser[]>{
-        const users = await this.prismaClient.user.findMany()
+        const users = await this.prismaClient.user.findMany({
+            include: {
+                Document: true
+            }
+        })
         return users
     }
 
@@ -32,6 +36,9 @@ export class UserRepository implements IUserRepository {
         const user = await this.prismaClient.user.findUnique({
             where: {
                 id 
+            },
+            include: {
+                Document: true
             }
         })
         return user;
@@ -41,6 +48,9 @@ export class UserRepository implements IUserRepository {
         const user = await this.prismaClient.user.findUnique({
             where: {
                 email
+            },
+            include: {
+                Document: true
             }
         })
         return user
