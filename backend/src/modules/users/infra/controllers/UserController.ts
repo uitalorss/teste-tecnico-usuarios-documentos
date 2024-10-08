@@ -22,14 +22,14 @@ export class UserController {
     }
 
     public async show(req: Request, res: Response){
-        const {id} = req.params;
+        const {id} = req.user;
         const findUserService = container.resolve(FindUserService);
         const user = await findUserService.execute({id})
         res.json(user)
     }
 
     public async update(req: Request, res: Response){
-        const {id} = req.params;
+        const {id} = req.user;
         const {name, email} = req.body;
         const updateUserService = container.resolve(UpdateUserService)
         await updateUserService.execute({id, name, email})
@@ -37,7 +37,7 @@ export class UserController {
     }
 
     public async delete(req: Request, res: Response){
-        const {id} = req.params;
+        const {id} = req.user;
         const deleteUserService = container.resolve(DeleteUserService)
         await deleteUserService.execute({id})
         res.status(204).send();

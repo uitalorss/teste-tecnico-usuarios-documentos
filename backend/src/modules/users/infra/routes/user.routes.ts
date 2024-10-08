@@ -1,12 +1,14 @@
 import { Router } from "express";
 import { UserController } from "../controllers/UserController";
+import { handleAuthentication } from "../../../../shared/infra/middlewares/handleAuthentication";
 
 
 export const userRoutes = Router();
 const userController = new UserController();
 
 userRoutes.post("/", userController.create);
-userRoutes.get("/", userController.showAll);
-userRoutes.get("/:id", userController.show);
-userRoutes.put("/:id", userController.update);
-userRoutes.delete("/:id", userController.delete);
+userRoutes.use(handleAuthentication)
+
+userRoutes.get("/", userController.show);
+userRoutes.put("/", userController.update);
+userRoutes.delete("/", userController.delete);
