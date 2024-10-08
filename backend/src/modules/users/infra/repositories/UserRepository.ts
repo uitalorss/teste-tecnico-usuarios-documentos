@@ -4,6 +4,8 @@ import { IUser } from "../../domain/models/IUser";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { inject, injectable } from "tsyringe"
 import { IGetUserDTO } from "../../domain/models/DTO/IGetUserDTO";
+import { IUpdateUser } from "../../domain/models/DTO/IUpdateUserDTO";
+import { IDeleteUserDTO } from "../../domain/models/DTO/IDeleteUserDTO";
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -42,6 +44,26 @@ export class UserRepository implements IUserRepository {
             }
         })
         return user
+    }
+
+    async update({ id, name, email }: IUpdateUser): Promise<void> {
+        await this.prismaClient.user.update({
+            where: {
+                id
+            },
+            data: {
+                name,
+                email
+            }
+        })
+    }
+
+    async delete({id}: IDeleteUserDTO): Promise<void> {
+        await this.prismaClient.user.delete({
+            where: {
+                id
+            }
+        })
     }
 
 }

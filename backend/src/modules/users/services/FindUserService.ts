@@ -4,7 +4,7 @@ import { IGetUserDTO } from "../domain/models/DTO/IGetUserDTO";
 import { NotFoundError } from "../../../shared/errors/ApiError";
 
 @injectable()
-export class FindUser {
+export class FindUserService {
     constructor(
         @inject("UserRepository")
         private readonly userRepository: UserRepository
