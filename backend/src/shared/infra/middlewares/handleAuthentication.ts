@@ -11,7 +11,6 @@ interface IToken{
 
 export const handleAuthentication = (req: Request, res: Response, next: NextFunction) => {
     const {authorization} = req.headers;
-    console.log(authorization)
     if(!authorization) {
         throw new ApiError("Token não informado", 401)
     }
