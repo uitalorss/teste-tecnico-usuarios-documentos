@@ -7,4 +7,5 @@ export interface IUserRepository {
     create({name, email}: ICreateUserDTO): Promise<IUser>
     findAll(): Promise<IUser[]>
     find({id}: IGetUserDTO): Promise<IUser | null>
+    findByEmail(email: string): Promise<IUser | null>
 }

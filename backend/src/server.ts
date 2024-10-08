@@ -1,4 +1,5 @@
 import "reflect-metadata"
+import "express-async-errors"
 import express from "express"
 import { router } from "./shared/infra/routes"
 import "./shared/container/index"
