@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev":"nodemon --exec ts-node ./src/server.ts"
+    "dev": "nodemon --exec ts-node ./src/server.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.20.0",
@@ -9,7 +9,8 @@
     "express": "^4.21.0",
     "pg": "^8.13.0",
     "prisma": "^5.20.0",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@prisma/adapter-pg": "^5.20.0",
