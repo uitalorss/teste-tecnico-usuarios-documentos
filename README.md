@@ -7,8 +7,6 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/uitalorss/teste-tecnico-usuarios-documentos?style=for-the-badge)
 ![GitHub Contributors](https://img.shields.io/github/contributors/uitalorss/teste-tecnico-usuarios-documentos?style=for-the-badge&color=blue)
 
-<img src="frontend/public/image.png">
-
 ### 💡 Um pouco sobre o projeto.
 
 Esse projeto é um teste técnico disponibilizado pela empresa Municca Sign para uma vaga de Desenvolvedor Fullstack. Onde é pedido a criação de uma API onde é possível cadastrar usuários e documentos vinculados ao usuário.
@@ -18,7 +16,7 @@ Esse projeto é um teste técnico disponibilizado pela empresa Municca Sign para
 O projeto está em desenvolvimento e, apesar do teste não cobrir algumas das situações abaixo, eu continuarei as desenvolvendo para meu aprendizado. As próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Desenvolvimento da API do projeto.
-- [x] Construção da documentação das rotas da API com o Swagger.
+- [x] Construção da documentação das rotas da API com o Swagger. 
 - [ ] Implementação de um ecossistema de microsserviços da aplicação com Docker.
 - [ ] Implementação da cobertura de testes unitários.
 - [ ] Implementação dos testes de ponta-a-ponta.
@@ -73,6 +71,7 @@ Para inicializar o projeto, acesse as pastas **backend** e **frontend** e rode o
     yarn dev
     ```
 
+**A documentação das rotas da API está disponível no endereço http://localhost:3000/api-docs**
 
 ## ✅ Requisitos funcionais
 
