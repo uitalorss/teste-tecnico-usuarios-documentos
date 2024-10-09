@@ -54,7 +54,7 @@ Para inicializar o projeto, acesse as pastas **backend** e **frontend** e rode o
     yarn:
 
     ```
-    yarn migration:run
+    npx prisma migrate dev
     yarn dev
     ```
     
