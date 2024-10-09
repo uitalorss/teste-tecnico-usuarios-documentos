@@ -13,7 +13,6 @@ export class CreateUserService {
     ){}
     public execute({name, email}: ICreateUserDTO): IUser {
         const isEmailExists = this.userRepository.findByEmail(email);
-        console.log("to aqui")
         if(isEmailExists){
             throw new BadRequestError("Email já cadastrado.")
         }
