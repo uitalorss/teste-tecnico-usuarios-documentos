@@ -10,8 +10,8 @@ export class UpdateDocumentService {
         private readonly documentRepository: DocumentRepository
     ){}
 
-    public async execute({userId, id, name, status}: IUpdateDocumentDTO): Promise<void> {
-        const document = await this.documentRepository.find({id})
+    public async execute({userId, documentId, name, status}: IUpdateDocumentDTO): Promise<void> {
+        const document = await this.documentRepository.find({documentId: documentId, userId: userId})
         if(!document){
             throw new NotFoundError("Documento não existe.")
         }
@@ -20,6 +20,6 @@ export class UpdateDocumentService {
             throw new BadRequestError("Não é possível excluir um documento que não é seu.")
         }
 
-        await this.documentRepository.update({id, name, status})
+        await this.documentRepository.update({userId, documentId, name, status})
     }
 }

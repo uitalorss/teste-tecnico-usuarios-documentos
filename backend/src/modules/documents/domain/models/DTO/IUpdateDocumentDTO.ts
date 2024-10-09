@@ -1,6 +1,6 @@
 export interface IUpdateDocumentDTO {
     userId: string
-    id: string;
+    documentId: string;
     name: string;
     status: string;
 }

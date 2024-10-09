@@ -1,5 +1,3 @@
-import { IUser } from "../../../users/domain/models/IUser";
-
 
 export interface IDocument {
     id: string;

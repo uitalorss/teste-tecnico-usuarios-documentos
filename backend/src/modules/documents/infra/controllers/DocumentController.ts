@@ -6,18 +6,19 @@ import { DeleteDocumentService } from "../../services/DeleteDocumentService";
 import { UpdateDocumentService } from "../../services/UpdateDocumentService";
 
 export class DocumentController {
-    public async create(req: Request, res: Response){
+    public create(req: Request, res: Response){
         const {name, status} = req.body;
         const {id} = req.user;
         const createDocumentService = container.resolve(CreateDocumentService)
-        const document = await createDocumentService.execute({name, status, userId: id});
+        const document = createDocumentService.execute({name, status, userId: id});
         res.status(201).json(document)
     }
 
-    public async show(req: Request, res: Response){
+    public show(req: Request, res: Response){
         const {id_document} = req.params;
+        const {id} = req.user
         const findDocumentService = container.resolve(FindDocumentService);
-        const document = await findDocumentService.execute({id: id_document})
+        const document = findDocumentService.execute({documentId: id_document, userId: id})
         res.json(document);
     }
 
@@ -26,7 +27,7 @@ export class DocumentController {
         const {id} = req.user;
         const {name, status} = req.body;
         const updateDocumentService = container.resolve(UpdateDocumentService);
-        await updateDocumentService.execute({userId: id, id: id_document, name, status})
+        await updateDocumentService.execute({userId: id, documentId: id_document, name, status})
         res.status(204).send()
     }
 

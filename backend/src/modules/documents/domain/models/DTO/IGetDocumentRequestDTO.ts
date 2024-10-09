@@ -1,5 +1,6 @@
 
 
 export interface IGetDocumentRequestDTO {
-    id: string
+    documentId: string;
+    userId: string;
 }

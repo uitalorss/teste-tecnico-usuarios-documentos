@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IUpdateUserDTO } from "../../domain/models/DTO/IUpdateUserDTORequest";
  
 
-const filepath = path.join(__dirname, "../../../../shared/database/db.json")
+const filepath = path.join(__dirname, "../../../../shared/database/db.json");
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -27,7 +27,7 @@ export class UserRepository implements IUserRepository {
 
     private writeFile(data: any): void {
         fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
-      }
+    }
 
     create({ name, email }: ICreateUserDTO): IUser {
         const db = this.readfile()

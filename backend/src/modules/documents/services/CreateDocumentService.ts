@@ -10,8 +10,8 @@ export class CreateDocumentService {
         private readonly documentRepository: DocumentRepository,
     ){}
 
-    public async execute({name, status, userId}: ICreateDocumentDTO){
-        const document = await this.documentRepository.create({name, status, userId})
+    public execute({name, status, userId}: ICreateDocumentDTO){
+        const document = this.documentRepository.create({name, status, userId})
         return document
     }
 }

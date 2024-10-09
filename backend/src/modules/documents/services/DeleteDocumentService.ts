@@ -12,8 +12,8 @@ export class DeleteDocumentService {
        private readonly documentRepository: DocumentRepository,
     ){}
 
-    public async execute({userId, documentId}: IDeleteDocumentDTO): Promise<void>{
-        const document = await this.documentRepository.find({id: documentId});
+    public execute({userId, documentId}: IDeleteDocumentDTO): void{
+        const document = this.documentRepository.find({documentId, userId});
         if(!document){
             throw new NotFoundError("Documento não existe.")
         }
@@ -22,7 +22,7 @@ export class DeleteDocumentService {
             throw new BadRequestError("Não é possível excluir um documento que não é seu.")
         }
 
-        await this.documentRepository.delete({id: documentId})
+        this.documentRepository.delete({documentId, userId})
     }
 
 }
