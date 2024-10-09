@@ -16,9 +16,10 @@ Esse projeto é um teste técnico disponibilizado pela empresa Municca Sign para
 O projeto está em desenvolvimento e, apesar do teste não cobrir algumas das situações abaixo, eu continuarei as desenvolvendo para meu aprendizado. As próximas atualizações serão voltadas nas seguintes tarefas:
 
 - [x] Desenvolvimento da API do projeto.
-- [x] Construção da documentação das rotas da API com o Swagger. 
+- [x] Construção da documentação das rotas da API com o Swagger.
+- [x] Desenvolvimento da interface responsiva da aplicação. 
 - [ ] Implementação de um ecossistema de microsserviços da aplicação com Docker.
-- [ ] Implementação da cobertura de testes unitários.
+- [ ] Implementação da cobertura de testes unitários das rotas da API.
 - [ ] Implementação dos testes de ponta-a-ponta.
 
 ## 💻 Tecnologias utilizadas
@@ -71,7 +72,7 @@ Para inicializar o projeto, acesse as pastas **backend** e **frontend** e rode o
     yarn dev
     ```
 
-**A documentação das rotas da API está disponível no endereço http://localhost:3000/api-docs**
+**A documentação das rotas da API estará disponível no endereço http://localhost:3000/api-docs após inicializar o backend do projeto.**
 
 ## ✅ Requisitos funcionais
 

@@ -6,15 +6,21 @@
       "email": "email2@email.com",
       "documents": [
         {
-          "id": "6df7d5e8-7f0f-4404-b446-c39313eaf3ef",
-          "name": "Um diario qualquer",
-          "status": "Finalizado",
+          "id": "a7e7d95c-11a9-4268-9e5f-f2df529456df",
+          "name": "Documento ainda mais importante",
+          "status": "Assinado",
           "userId": "438afbfa-0ce1-4d90-b3b9-d22f9f336520"
         },
         {
-          "id": "542c7332-e739-4dda-bfce-64b577f21f71",
-          "name": "Um diario qualquer",
-          "status": "Não assinado",
+          "id": "1e7cc354-e5cf-4b81-adf3-4637e56980b8",
+          "name": "Licitação",
+          "status": "Assinado",
+          "userId": "438afbfa-0ce1-4d90-b3b9-d22f9f336520"
+        },
+        {
+          "id": "28094a0c-4353-4348-ae42-0fcb2107d5f2",
+          "name": "Documento confidencial",
+          "status": "Parcialmente assinado",
           "userId": "438afbfa-0ce1-4d90-b3b9-d22f9f336520"
         }
       ]
