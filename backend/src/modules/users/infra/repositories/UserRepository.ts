@@ -4,8 +4,14 @@ import { IUser } from "../../domain/models/IUser";
 import { IUserRepository } from "../../domain/repositories/IUserRepository";
 import { inject, injectable } from "tsyringe"
 import { IGetUserDTO } from "../../domain/models/DTO/IGetUserDTO";
-import { IUpdateUser } from "../../domain/models/DTO/IUpdateUserDTO";
 import { IDeleteUserDTO } from "../../domain/models/DTO/IDeleteUserDTO";
+import path from "path";
+import fs from "fs";
+import { v4 as uuidv4 } from 'uuid';
+import { IUpdateUserDTO } from "../../domain/models/DTO/IUpdateUserDTORequest";
+ 
+
+const filepath = path.join(__dirname, "../../../../shared/database/db.json")
 
 @injectable()
 export class UserRepository implements IUserRepository {
@@ -13,67 +19,67 @@ export class UserRepository implements IUserRepository {
         @inject("PrismaClient")
         private prismaClient: PrismaClient
     ){}
-    async create({ name, email }: ICreateUserDTO): Promise<IUser> {
-        const user = await this.prismaClient.user.create({
-            data: {
-                name,
-                email
-            }
-        })
+
+    private readfile() {
+        const data = fs.readFileSync(filepath, "utf-8");
+        return JSON.parse(data)
+    }
+
+    private writeFile(data: any): void {
+        fs.writeFileSync(filepath, JSON.stringify(data, null, 2));
+      }
+
+    create({ name, email }: ICreateUserDTO): IUser {
+        const db = this.readfile()
+        
+        const user = {
+            id: uuidv4(),
+            name,
+            email,
+            documents: []
+        }
+
+        db.users.push(user)
+        this.writeFile(db)
         return user;
     }
 
-    async findAll(): Promise<IUser[]>{
-        const users = await this.prismaClient.user.findMany({
-            include: {
-                Document: true
-            }
-        })
-        return users
+    find({id}: IGetUserDTO): IUser | undefined{
+        const db = this.readfile()
+        const user = db.users.find((user: IUser) => user.id === id)
+
+        return user
+
     }
 
-    async find({id}: IGetUserDTO): Promise<IUser | null>{
-        const user = await this.prismaClient.user.findUnique({
-            where: {
-                id 
-            },
-            include: {
-                Document: true
-            }
-        })
-        return user;
-    }
+    findByEmail(email: string): IUser | undefined{
+        const db = this.readfile()
 
-    async findByEmail(email: string){
-        const user = await this.prismaClient.user.findUnique({
-            where: {
-                email
-            },
-            include: {
-                Document: true
-            }
-        })
+        const user = db.users.find((user: IUser) => user.email === email)
+
         return user
     }
 
-    async update({ id, name, email }: IUpdateUser): Promise<void> {
-        await this.prismaClient.user.update({
-            where: {
-                id
-            },
-            data: {
-                name,
-                email
-            }
-        })
+    update({ id, name, email }: IUpdateUserDTO): void {
+        const db = this.readfile()
+        const userIndex = db.users.findIndex((user: IUser) => user.id === id);
+
+        if(userIndex !== -1){
+            db.users[userIndex].name = name;
+            db.users[userIndex].email = email
+        }
+
+        this.writeFile(db)
     }
 
-    async delete({id}: IDeleteUserDTO): Promise<void> {
-        await this.prismaClient.user.delete({
-            where: {
-                id
-            }
-        })
+    delete({id}: IDeleteUserDTO): void {
+        const db = this.readfile()
+
+        const deleteUser = db.users.filter((user: IUser) => user.id !== id)
+
+        db.users = deleteUser
+
+        this.writeFile(db)
     }
 
 }

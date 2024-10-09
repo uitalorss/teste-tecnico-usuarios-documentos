@@ -7,7 +7,7 @@ export class SessionController {
     public async create(req: Request, res: Response) {
         const {email} = req.body;
         const createSessionService = container.resolve(CreateSessionService);
-        const login = await createSessionService.execute({email})
+        const login = createSessionService.execute({email})
         res.status(201).json({login})
     }
 }

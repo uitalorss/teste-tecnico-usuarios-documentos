@@ -13,8 +13,8 @@ export class CreateSessionService {
         private readonly userRepository: UserRepository
     ){}
 
-    public async execute({email}: ISessionUserDTO) {
-        const user = await this.userRepository.findByEmail(email);
+    public execute({email}: ISessionUserDTO) {
+        const user = this.userRepository.findByEmail(email);
         if(!user){
             throw new NotFoundError("Usuário não encontrado.");
         }

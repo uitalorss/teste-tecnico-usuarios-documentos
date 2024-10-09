@@ -1,7 +1,6 @@
 import {Request, Response} from "express"
 import { container } from "tsyringe"
 import { CreateUserService } from "../../services/CreateUserService";
-import { FindAllUsersService } from "../../services/FindAllUsersService";
 import { FindUserService } from "../../services/FindUserService";
 import { UpdateUserService } from "../../services/UpdateUserService";
 import { DeleteUserService } from "../../services/DeleteUserService";
@@ -15,16 +14,10 @@ export class UserController {
         res.json({user})
     }
 
-    public async showAll(req: Request, res: Response){
-        const findAllUsersService = container.resolve(FindAllUsersService);
-        const users = await findAllUsersService.execute()
-        res.json({users})
-    }
-
     public async show(req: Request, res: Response){
         const {id} = req.user;
         const findUserService = container.resolve(FindUserService);
-        const user = await findUserService.execute({id})
+        const user = findUserService.execute({id})
         res.json(user)
     }
 

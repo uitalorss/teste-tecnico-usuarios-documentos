@@ -10,11 +10,11 @@ export class DeleteUserService {
         private readonly userRepository: UserRepository
     ){}
 
-    public async execute({id}: IDeleteUserDTO): Promise<void>{
-        const isUserExists = await this.userRepository.find({id});
+    public execute({id}: IDeleteUserDTO): void{
+        const isUserExists = this.userRepository.find({id});
         if(!isUserExists){
             throw new NotFoundError("Usuário não encontrado.");
         }
-        await this.userRepository.delete({id})
+        this.userRepository.delete({id})
     }
 }

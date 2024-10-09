@@ -11,13 +11,14 @@ export class CreateUserService {
         @inject("UserRepository")
         private readonly userRepository: IUserRepository
     ){}
-    public async execute({name, email}: ICreateUserDTO): Promise<IUser> {
-        const isEmailExists = await this.userRepository.findByEmail(email);
+    public execute({name, email}: ICreateUserDTO): IUser {
+        const isEmailExists = this.userRepository.findByEmail(email);
+        console.log("to aqui")
         if(isEmailExists){
             throw new BadRequestError("Email já cadastrado.")
         }
 
-        const user = await this.userRepository.create({name, email});
+        const user = this.userRepository.create({name, email});
         return user
     }
 }

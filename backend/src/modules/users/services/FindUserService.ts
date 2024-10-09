@@ -10,8 +10,8 @@ export class FindUserService {
         private readonly userRepository: UserRepository
     ){}
 
-    public async execute({id}: IGetUserDTO){
-        const user = await this.userRepository.find({id})
+    public execute({id}: IGetUserDTO){
+        const user = this.userRepository.find({id})
         if(!user){
             throw new NotFoundError("Usuário não encontrado.")
         }
