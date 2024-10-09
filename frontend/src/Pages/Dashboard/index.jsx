@@ -16,7 +16,9 @@ export const Dashboard = () => {
 
     useEffect(() => {
         try {
-            load();
+            setTimeout(() => {
+                load();
+            }, 1000)
         } catch (error) {
             console.log(error.response)
         }
