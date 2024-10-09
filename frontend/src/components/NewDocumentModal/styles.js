@@ -50,6 +50,17 @@ export const Content = styled(Dialog.Content)`
         font-size: .75rem;
       }
     }
+    select{
+      font-size: 1rem;
+      padding: 1rem;
+      width: 100%;
+      background: #262626;
+      border: none;
+      outline: none;
+      color: #d9d9d9;
+      line-height: 1.6;
+      border-radius: 8px;
+    }
   }
   @media only screen and (max-width: 575px) {
       min-width: 24rem;

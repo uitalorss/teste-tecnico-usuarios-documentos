@@ -7,7 +7,6 @@ export const UserContext = createContext();
 
 export const UserContextProvider = ({children}) => {
     const [userData, setUserData] = useState({});
-    const [allUsers, setAllUsers] = useState([])
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState("");
     const [open, setOpen] = useState(false);
@@ -26,21 +25,12 @@ export const UserContextProvider = ({children}) => {
             setIsLoading(true)
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             const user = await axios.get(`${baseURL}/user`);
-            console.log(user.data)
             setUserData(user.data);
             setIsLoading(false);
         } catch (error) {
             setAuthenticated(false)
-            console.log(error.response)
+            console.log(error)
         }
-    }
-
-    async function loadAdminData() {
-        setAuthenticated(false)
-        setIsLoading(true)
-        const users = await axios.get(`${baseURL}/admin`)
-        setAllUsers(users.data);
-        setIsLoading(false)
     }
 
     async function createUser(data, navigate){
@@ -94,7 +84,7 @@ export const UserContextProvider = ({children}) => {
         }
     }
 
-    async function createContact(data) {
+    async function createDocument(data) {
         try {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await axios.post(`${baseURL}/document`,
@@ -102,7 +92,6 @@ export const UserContextProvider = ({children}) => {
             axiosConfig,
             );
             setErrorMessage("");
-            alert("Contato adicionado com sucesso.");
             setOpen(false);
             load();
         } catch (error) {
@@ -120,7 +109,6 @@ export const UserContextProvider = ({children}) => {
         try {
             axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
             await axios.put(`${baseURL}/document/${documentId}`,data,axiosConfig);
-            alert("Documento atualizado com sucesso.");
             load();
         } catch (error) {
             if(error.response.data.message === "Validation failed"){
@@ -149,7 +137,7 @@ export const UserContextProvider = ({children}) => {
             isLoading,
             deleteDocument,
             load,
-            createContact,
+            createDocument,
             errorMessage,
             open,
             setOpen,
@@ -159,8 +147,6 @@ export const UserContextProvider = ({children}) => {
             openUpdateModal,
             setOpenUpdateModal,
             updateDocument,
-            loadAdminData,
-            allUsers,
             }}>
             {children}
         </UserContext.Provider>

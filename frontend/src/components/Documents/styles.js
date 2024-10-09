@@ -56,6 +56,12 @@ export const ItemDocumentContainer = styled.table`
                         flex-direction: column;
                     }
                 }
+                select{
+                    width: 100%;
+                    padding: .5rem;
+                    border-radius: 4px;
+                    border: none;
+                }
             }
         }
     }

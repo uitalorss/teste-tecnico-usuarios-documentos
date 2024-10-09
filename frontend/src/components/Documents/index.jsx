@@ -5,6 +5,7 @@ import { UserContext } from "../../context/UserContext";
 import { AuthContext } from "../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import {XCircle} from "phosphor-react"
+import { useNavigate } from "react-router-dom";
 
 
 export const Documents = ({document}) => {
@@ -12,12 +13,11 @@ export const Documents = ({document}) => {
     const {deleteDocument, updateDocument} = useContext(UserContext);
     const [updateMode, setUpdateMode] = useState(false)
     const { register, handleSubmit } = useForm();
-
+    const navigate = useNavigate()
 
     const onsubmit = async (data) => {
         if(updateMode){
-            updateDocument(data, document.id);
-            console.log("trabalhar aqui.");
+            updateDocument(data, document.id, navigate);
             setUpdateMode(false)
         }else{
             setUpdateMode(true)
@@ -48,7 +48,12 @@ export const Documents = ({document}) => {
                     {
                         updateMode ? (
                             <td>
-                                <input type="text" placeholder="Nome" {...register("status")} defaultValue={document.status}/>
+                                <select name="status" {...register("status")}>
+                                    <option value="" disabled>Selecione a opção</option>
+                                    <option value="Não assinado">Não assinado</option>
+                                    <option value="Parcialmente assinado">Parcialmente assinado</option>
+                                    <option value="Assinado">Assinado</option>
+                                </select> 
                             </td>
                         ):(
                             <td className="data">

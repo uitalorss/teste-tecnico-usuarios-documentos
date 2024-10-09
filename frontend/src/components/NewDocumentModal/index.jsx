@@ -5,14 +5,16 @@ import { useForm } from "react-hook-form";
 import { DefaultButton, SpanError } from "../../global";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 
 export const NewDocumentModal = () => {
     const { register, handleSubmit } = useForm();
-    const {createContact, errorMessage} = useContext(UserContext) 
+    const {createDocument, errorMessage} = useContext(UserContext) 
+    const navigate = useNavigate()
     
     const onsubmit = async (data) => {
-        createContact(data)
+        createDocument(data, navigate)
     }
     return(
         <Dialog.Portal>
@@ -21,7 +23,12 @@ export const NewDocumentModal = () => {
                 <div>
                     <h2>Novo Documento</h2>
                     <input type="text" placeholder="Nome" {...register("name")} />
-                    <input type="text" placeholder="E-mail" {...register("status")}/>    
+                    <select name="status" {...register("status")}>
+                        <option value="" disabled>Selecione a opção</option>
+                        <option value="Não assinado">Não assinado</option>
+                        <option value="Parcialmente assinado">Parcialmente assinado</option>
+                        <option value="Assinado">Assinado</option>
+                    </select> 
                     <DefaultButton onClick={() => handleSubmit(onsubmit)()}>
                         Adicionar
                     </DefaultButton>
