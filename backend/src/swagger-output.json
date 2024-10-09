@@ -1,0 +1,440 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Documentação das rotas do projeto teste-tecnico-usuarios-documentos.",
+        "description": "Documentação das rotas da api criada como teste técnico proposto pela empresa Municca Sign",
+        "version": "1.0.0",
+            "contact": {
+                "name": "Uítalo Souza",
+                "email": "uitalo.urss@gmail.com"
+            }
+        },
+    "paths": {
+    "/user": {
+        "post": {
+            "tags": ["User"],
+            "summary": "Create a user",
+            "description": "This endpoint create a user.",
+            "requestBody":{
+                "$ref": "#/components/requestBody/CreateOrUpdateUser"
+            },
+            "responses": {
+                "201": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "propertiers": {
+                                    "id": {
+                                        "type": "number"
+                                    },
+                                    "nome": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "id": 1,
+                                "name": "Jhon Doe",
+                                "email": "jhon@mail.com"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "#/components/responses/ValidationError"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+      },
+      "get": {
+        "tags": ["User"],
+        "summary": "Get a user",
+        "description": "This endpoint get a user.",
+        "security": {
+            "bearerAuth": []
+        },
+        "responses": {
+            "200": {
+                "description": "Success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "propertiers": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "nome": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "document": {
+                                    "type": "array"
+                                }
+
+                            }
+                        },
+                        "example": {
+                            "id": "e584bc33-5201-460c-b297-c217c9cd3220",
+                            "name": "Jhon Doe",
+                            "email": "jhon@mail.com"
+                        }
+                    }
+                }
+            },
+            "404": {
+                "$ref": "#/components/responses/NotFoundError"
+            },
+            "401": {
+                "$ref": "#/components/responses/AuthenticateError"
+            }
+        }
+      },
+      "put": {
+        "tags": ["User"],
+        "summary": "Update a user",
+        "description": "This endpoint update a user.",
+        "requestBody":{
+            "$ref": "#/components/requestBody/CreateOrUpdateUser"
+        },
+        "responses": {
+            "204": {
+                "$ref": "#/components/responses/SuccessNoContent"
+            },
+            "401": {
+                "$ref": "#/components/responses/AuthenticateError"
+            },
+            "404": {
+                "$ref": "#/components/responses/NotFoundError"
+            },
+            "500": {
+                "$ref": "#/components/responses/InternalServerError"
+            }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete a user",
+        "description": "This endpoint delete a user.",
+        "responses": {
+            "204": {
+                "$ref": "#/components/responses/SuccessNoContent"
+            },
+            "401": {
+                "$ref": "#/components/responses/AuthenticateError"
+            },
+            "404": {
+                "$ref": "#/components/responses/NotFoundError"
+            },
+            "500": {
+                "$ref": "#/components/responses/InternalServerError"
+            }
+        }
+      }
+    },
+    "/document": {
+        "post": {
+            "tags": ["Document"],
+            "summary": "Create a document",
+            "description": "This endpoint create a document.",
+            "security": {
+                "bearerAuth": []
+            },
+            "requestBody":{
+                "$ref": "#/components/requestBody/CreateOrUpdateDocument"
+            },
+            "responses": {
+                "201": {
+                    "$ref": "#/components/responses/SuccessForDocuments"
+                },
+                "400": {
+                    "$ref": "#/components/responses/ValidationError"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+      }
+    },
+    "/document/{id}": {
+        "get": {
+            "tags": ["Document"],
+            "summary": "Get a document",
+            "description": "This endpoint get a document passed by id in route param.",
+            "parameters": {
+                "$ref": "#/components/parameters/DocumentPathParameters"
+            },
+            "security": {
+                "bearerAuth": []
+            },
+            "responses": {
+                "200": {
+                    "$ref": "#/components/responses/SuccessForDocuments"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFoundError"
+                },
+                "401": {
+                    "$ref": "#/components/responses/AuthenticateError"
+                }
+            }
+          },
+          "put": {
+            "tags": ["Document"],
+            "summary": "Update a document",
+            "description": "This endpoint update a document passed by id in route param.",
+            "security": {
+                "bearerAuth": []
+            },
+            "requestBody":{
+                "$ref": "#/components/requestBody/CreateOrUpdateUser"
+            },
+            "responses": {
+                "204": {
+                    "$ref": "#/components/responses/SuccessNoContent"
+                },
+                "401": {
+                    "$ref": "#/components/responses/AuthenticateError"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFoundError"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+          },
+          "delete": {
+            "tags": ["Document"],
+            "summary": "Delete a document",
+            "description": "This endpoint delete a document passed by id in route param..",
+            "security": {
+                "bearerAuth": []
+            },
+            "responses": {
+                "204": {
+                    "$ref": "#/components/responses/SuccessNoContent"
+                },
+                "401": {
+                    "$ref": "#/components/responses/AuthenticateError"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFoundError"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+          }
+    },
+    "/login": {
+        "post": {
+            "tags": ["Login"],
+            "summary": "Authenticate a user",
+            "description": "This endpoint allow to authenticate a user.",
+            "requestBody":{
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "propertiers": {
+                                "email": {
+                                    "type": "string"
+                                }
+                            },
+                            "example": {
+                                "email": "jhon@mail.com"
+                            }
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "201": {
+                    "description": "Success",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "propertiers": {
+                                    "login": {
+                                        "type": "object",
+                                        "properties": {
+                                            "token": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }                                    
+                                }
+                            },
+                            "example": {
+                                "login": {
+                                    "token": "sdasdasldjkasldjsalkdlasdjasdasdjasdkjla"
+                                }
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "$ref": "#/components/responses/ValidationError"
+                },
+                "404": {
+                    "$ref": "#/components/responses/NotFoundError"
+                },
+                "500": {
+                    "$ref": "#/components/responses/InternalServerError"
+                }
+            }
+        }
+    }
+  },
+  "components": {
+    "parameters": {
+        "DocumentPathParameters": [
+            {
+                "in": "path",
+                "name": "id_document",
+                "schema": {
+                    "type": "string"
+                },
+                "required": true,
+                "description": "Document identificator" 
+            }
+        ]
+    },
+    "requestBody": {
+        "CreateOrUpdateUser": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "propertiers": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            }
+                        },
+                        "example": {
+                            "name": "Jhon Doe",
+                            "email": "jhon@mail.com"
+                        }
+                    }
+                }
+            }
+        },
+        "CreateOrUpdateDocument": {
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "propertiers": {
+                            "name": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        },
+                        "example": {
+                            "name": "Um livro qualquer",
+                            "email": "Em andamento"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "InternalServerError": {
+            "description": "Internal Server error",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Internal Server error"
+                    }
+                }
+            }
+        },
+        "NotFoundError": {
+            "description": "Not Found Errors",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": " ******* Não encontrado."
+                    }
+                }
+            }
+        },
+        "ValidationError": {
+            "description": "Validation Errors",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": " ******* já cadastrado."
+                    }
+                }
+            }
+        },
+        "AuthenticateError": {
+            "description": "Authenticate errors",
+            "content": {
+                "application/json": {
+                    "example": {
+                        "message": "Token inválido."
+                    }
+                }
+            }
+        },
+        "SuccessNoContent": {
+            "description": "Success"
+        },
+        "SuccessForDocuments": {
+            "description": "Success",
+            "content": {
+                "application/json": {
+                    "schema": {
+                        "type": "object",
+                        "propertiers": {
+                            "id": {
+                                "type": "number"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "userId": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "example": {
+                        "id": "98fb8731-7389-44f7-b7c2-17a0be447012",
+                        "name": "Um diario qualquer",
+                        "status": "em andamento",
+                        "userId": "e584bc33-5201-460c-b297-c217c9cd3220"
+                    }
+                }
+            }
+        }
+    },
+    "securitySchemes": {
+        "bearerAuth": {
+            "type": "http",
+            "scheme": "bearer"
+        }
+    }
+  }
+}

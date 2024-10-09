@@ -8,6 +8,6 @@ export class SessionController {
         const {email} = req.body;
         const createSessionService = container.resolve(CreateSessionService);
         const login = await createSessionService.execute({email})
-        res.status(200).json({login})
+        res.status(201).json({login})
     }
 }
