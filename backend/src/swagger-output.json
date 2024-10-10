@@ -38,7 +38,7 @@
                                 }
                             },
                             "example": {
-                                "id": 1,
+                                "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
                                 "name": "Jhon Doe",
                                 "email": "jhon@mail.com"
                             }
@@ -77,7 +77,7 @@
                                 "email": {
                                     "type": "string"
                                 },
-                                "document": {
+                                "documents": {
                                     "type": "array"
                                 }
 
@@ -322,12 +322,13 @@
                                 "type": "string"
                             },
                             "email": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": ["Não assinado", "Parcialmente assinado", "Assinado"]
                             }
                         },
                         "example": {
                             "name": "Jhon Doe",
-                            "email": "jhon@mail.com"
+                            "email": "Não assinado"
                         }
                     }
                 }
@@ -348,7 +349,7 @@
                         },
                         "example": {
                             "name": "Um livro qualquer",
-                            "email": "Em andamento"
+                            "email": "Não assinado"
                         }
                     }
                 }
