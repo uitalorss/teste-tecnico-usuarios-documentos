@@ -11,8 +11,8 @@ export class CreateUserService {
         @inject("UserRepository")
         private readonly userRepository: IUserRepository
     ){}
-    public execute({name, email}: ICreateUserDTO): IUser {
-        const isEmailExists = this.userRepository.findByEmail(email);
+    public async execute({name, email}: ICreateUserDTO): Promise<IUser> {
+        const isEmailExists = await this.userRepository.findByEmail(email);
         if(isEmailExists){
             throw new BadRequestError("Email já cadastrado.")
         }

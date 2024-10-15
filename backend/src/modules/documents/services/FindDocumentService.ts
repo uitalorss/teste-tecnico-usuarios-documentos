@@ -11,8 +11,8 @@ export class FindDocumentService {
         private readonly documentRepository: DocumentRepository
     ){}
 
-    public execute({documentId, userId}: IGetDocumentRequestDTO): IDocument{
-        const document = this.documentRepository.find({documentId, userId})
+    public async execute({documentId, userId}: IGetDocumentRequestDTO): Promise<IDocument>{
+        const document = await this.documentRepository.find({documentId, userId})
         if(!document){
             throw new NotFoundError("Documento não encontrado.")
         }

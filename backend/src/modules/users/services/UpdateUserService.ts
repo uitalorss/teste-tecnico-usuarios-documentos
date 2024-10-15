@@ -10,13 +10,13 @@ export class UpdateUserService {
         private readonly userRepository: UserRepository
     ){}
 
-    public execute({id, name, email}: IUpdateUserDTO){
-        const userToUpdate = this.userRepository.find({id});
+    public async execute({id, name, email}: IUpdateUserDTO): Promise<void>{
+        const userToUpdate = await this.userRepository.find({id});
         if(!userToUpdate){
             throw new BadRequestError("Usuário inválido!");
         }
 
-        const emailAlreadyInUse = this.userRepository.findByEmail(email);
+        const emailAlreadyInUse = await this.userRepository.findByEmail(email);
         if(emailAlreadyInUse && emailAlreadyInUse.email !== userToUpdate.email){
             throw new BadRequestError("Email já em uso.");
         }

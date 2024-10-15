@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { UserRepository } from "../infra/repositories/UserRepository";
 import { IGetUserDTO } from "../domain/models/DTO/IGetUserDTO";
 import { NotFoundError } from "../../../shared/errors/ApiError";
+import { IUser } from "../domain/models/IUser";
 
 @injectable()
 export class FindUserService {
@@ -10,8 +11,8 @@ export class FindUserService {
         private readonly userRepository: UserRepository
     ){}
 
-    public execute({id}: IGetUserDTO){
-        const user = this.userRepository.find({id})
+    public async execute({id}: IGetUserDTO): Promise<IUser>{
+        const user = await this.userRepository.find({id})
         if(!user){
             throw new NotFoundError("Usuário não encontrado.")
         }

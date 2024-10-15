@@ -5,8 +5,8 @@ import { IDocument } from "../models/IDocument";
 
 
 export interface IDocumentRepository {
-    create({name, status, userId}: ICreateDocumentDTO): IDocument
-    find({documentId, userId}: IGetDocumentRequestDTO): IDocument | undefined
-    delete({documentId, userId}: IGetDocumentRequestDTO): void;
-    update({documentId, name, status}: IUpdateDocumentDTO): void;
+    create({name, status, userId}: ICreateDocumentDTO): Promise<IDocument>
+    find({documentId, userId}: IGetDocumentRequestDTO): Promise<IDocument | null>
+    delete({documentId, userId}: IGetDocumentRequestDTO): Promise<void>;
+    update({documentId, name, status}: IUpdateDocumentDTO): Promise<void>;
 }

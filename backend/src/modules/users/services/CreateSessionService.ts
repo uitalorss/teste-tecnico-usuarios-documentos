@@ -13,8 +13,8 @@ export class CreateSessionService {
         private readonly userRepository: UserRepository
     ){}
 
-    public execute({email}: ISessionUserDTO) {
-        const user = this.userRepository.findByEmail(email);
+    public async  execute({email}: ISessionUserDTO) {
+        const user = await this.userRepository.findByEmail(email);
         if(!user){
             throw new NotFoundError("Usuário não encontrado.");
         }
@@ -26,6 +26,7 @@ export class CreateSessionService {
         const token = sign({id: user.id}, process.env.JWT_KEY, {
             expiresIn: "1h",
         })
+
         return {
             token
         }

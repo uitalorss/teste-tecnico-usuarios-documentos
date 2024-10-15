@@ -12,8 +12,8 @@ export class DeleteDocumentService {
        private readonly documentRepository: DocumentRepository,
     ){}
 
-    public execute({userId, documentId}: IDeleteDocumentDTO): void{
-        const document = this.documentRepository.find({documentId, userId});
+    public async execute({userId, documentId}: IDeleteDocumentDTO): Promise<void>{
+        const document = await this.documentRepository.find({documentId, userId});
         if(!document){
             throw new NotFoundError("Documento não existe.")
         }
